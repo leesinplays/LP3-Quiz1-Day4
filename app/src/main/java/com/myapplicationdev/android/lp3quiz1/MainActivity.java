@@ -43,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
             channel1.setDescription("This is for default notification");
             notificationManager.createNotificationChannel(channel1);
 
+            NotificationChannel channel2 = new
+                    NotificationChannel("marketing", "Marketing Channel",
+                    NotificationManager.IMPORTANCE_HIGH);
+
+            channel2.setDescription("This is for marketing notification");
+            notificationManager.createNotificationChannel(channel2);
+
         }
 
         Intent intent = new Intent(MainActivity.this, MainActivity.class);
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "default");
                 builder.setContentTitle("LP3 Quiz1");
-                builder.setContentText("This is a basic/simple notification");
+                builder.setContentText("This is simple");
                 builder.setSmallIcon(android.R.drawable.btn_star_big_off);
                 builder.setContentIntent(pIntent);
                 builder.setAutoCancel(true);
@@ -65,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 Notification n = builder.build();
 
                 notificationManager.notify(notificationID, n);
-                finish();
             }
         });
 
@@ -73,18 +79,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                NotificationCompat.BigPictureStyle bigPic = new NotificationCompat.BigPictureStyle();
+                bigPic.setBigContentTitle("This is big picture");
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.koala);
+                bigPic.bigPicture(bitmap);
+                bigPic.setSummaryText("Koala!");
+
                 NotificationCompat.Builder builder = new
                         NotificationCompat.Builder(MainActivity.this, "default");
                 builder.setContentTitle("LP3 Quiz1");
                 builder.setContentText("Expand to see picture");
                 builder.setSmallIcon(android.R.drawable.btn_star_big_off);
                 builder.setContentIntent(pIntent);
+                builder.setStyle(bigPic);
                 builder.setAutoCancel(true);
 
                 Notification n = builder.build();
 
                 notificationManager.notify(notificationID, n);
-                finish();
             }
         });
 
@@ -109,12 +121,12 @@ public class MainActivity extends AppCompatActivity {
                 builder.setContentText("Expand to see content");
                 builder.setSmallIcon(android.R.drawable.btn_star_big_off);
                 builder.setContentIntent(pIntent);
+                builder.setStyle(inboxS);
                 builder.setAutoCancel(true);
 
                 Notification n = builder.build();
 
                 notificationManager.notify(notificationID, n);
-                finish();
             }
         });
 
